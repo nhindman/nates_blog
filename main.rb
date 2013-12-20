@@ -15,7 +15,8 @@ require_relative 'models/comment'
 enable :sessions
 
 # set environment variables
-set :environment, :development
+# set :environment, :development
+set :environment, :production
 
 get '/' do 
   @username = session[:username] if session[:username]
