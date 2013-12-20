@@ -18,6 +18,6 @@ configure :production do
       :host => "ec2-54-204-43-139.compute-1.amazonaws.com",
       :username => "xukfbnsaqtkguk",
       :database => "d2vn6f2aq0r347", 
-      :password: "1DEnqhM8NM1-zFZfPSWdp8yuOh"
+      :password => "1DEnqhM8NM1-zFZfPSWdp8yuOh"
   )
 end
