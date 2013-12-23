@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/activerecord/rake'
+require 'coderay'
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 # configures the database
@@ -71,10 +72,7 @@ post '/posts/create' do
   @username = params[:username]
   title = params[:title]
   body = params[:body]
-  # user_id = params[:user_id].to_i
-  # create_new_post(title, body)
-  # user = User.find(user_id)
-
+  code = params[:code_language]
   user_matches = User.where("username='#{@username}'")
 
   unless user_matches.empty?
@@ -83,7 +81,7 @@ post '/posts/create' do
     user = User.where("username='anonymous'")
   end
 
-  Post.create(title: title, body: body, user: user)
+  Post.create(title: title, body: body, user: user, code_language: code)
   redirect '/posts'
 end
 
@@ -136,12 +134,12 @@ post "/comments/create" do
   body = params[:body]
   username = params[:username]
   post_id = params[:post_id].to_i
+  code = params[:code_language]
   user = User.find_by_username(username) 
   # a tiny bit of validation
   user ||= User.find_by_username("anonymous")
   post = Post.find(post_id)
-
-  Comment.create(body: body, user: user, post: post)
+  Comment.create(body: body, user: user, post: post, code_language: code)
   redirect "/post/#{post_id}"
 end
 

@@ -6,7 +6,11 @@
       <h2 class="post_title"><a href="/post/<%= post['id'] %>"><%= post['title'] %></a></h2>
       <p>by <%= post.user.username %> </p>
       <p>created at <%= post.created_at %> </p>
-      <p class="post_body"><%= post['body'] %></p>
+      <% if post.code_language == "none" %>
+        <p class="post_body"><%=post.body %></p>
+      <% else %>
+        <p class="post_body"><%= CodeRay.scan(post.body, post.code_language).div(:line_numbers => :table) %></p>
+      <% end %>
       <form action="/posts/delete/<%= post['id'] %>" method="POST">
         <button>delete</button>
       </form>
@@ -23,7 +27,13 @@
     <% else %>
       <input type="hidden" name="username" value="anonymous" />
     <% end %>
-    Body:<br />
+    <br><select name="code_language"></br>
+      <option value="none">Please choose language</option>
+      <option value="none">None</option>
+      <option value="ruby">ruby</option>
+      <option value="html">html</option>
+    </select><br>
+    </br>Body:<br/>
       <textarea name="body"></textarea>
     </p>
     <input type="submit" value="Post" />
