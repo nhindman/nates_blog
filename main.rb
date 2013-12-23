@@ -4,6 +4,8 @@ require 'sinatra/activerecord/rake'
 require 'coderay'
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
+set :environment, ENV["RACK_ENV"].to_sym
+
 # configures the database
 require_relative 'config/environments'
 
