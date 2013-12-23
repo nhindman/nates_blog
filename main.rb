@@ -4,9 +4,6 @@ require 'sinatra/activerecord/rake'
 require 'coderay'
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
-# configures the database
-require_relative 'config/environments'
-
 # models included
 require_relative 'models/post'
 require_relative 'models/user'
@@ -16,8 +13,10 @@ require_relative 'models/comment'
 enable :sessions
 
 # set environment variables
-# set :environment, :development
-set :environment, :production
+set :environment, ENV["RACK_ENV"].to_sym
+
+# configures the database
+require_relative 'config/environments'
 
 get '/' do 
   @username = session[:username] if session[:username]

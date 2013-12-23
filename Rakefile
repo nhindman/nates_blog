@@ -1,8 +1,9 @@
-require 'active_record'
 require 'sinatra'
+require 'active_record'
+require 'sinatra/activerecord'
+require "sinatra/activerecord/rake"
 # configures the database
 require_relative 'config/environments'
-require "sinatra/activerecord/rake"
 require_relative 'models/user'
 require_relative 'models/post'
 
