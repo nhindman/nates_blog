@@ -29,6 +29,7 @@ configure :production do
       :host => db.host,
       :username => db.user,
       :database => db.path[1..-1],
+      :password => db.password,
       :encoding => 'utf8'
   )
 end
